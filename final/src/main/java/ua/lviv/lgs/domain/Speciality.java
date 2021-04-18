@@ -27,7 +27,7 @@ public class Speciality {
 	@Column
 	private Integer numberStudOnSpeciality;
 	@ManyToOne
-	@JoinColumn(name = "speciality_id", nullable = false)
+	@JoinColumn(name = "faculty_id", nullable = false)
 	private Faculty faculty;
 	@ManyToMany(mappedBy = "entrantSpeciality")//-----------------------------------------------------<<<
 	private Set<Entrant> entrans;

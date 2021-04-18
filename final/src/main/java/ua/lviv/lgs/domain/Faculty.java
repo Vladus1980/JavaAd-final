@@ -29,7 +29,7 @@ public class Faculty {
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "subject_faculty", joinColumns = @JoinColumn(name = "faculty_id"), inverseJoinColumns = @JoinColumn(name = "subject_id"))
 	private Set<Subject> examSubjects;
-	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "facolty")
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "faculty")
 	@Column(nullable = false)
 	private Set<Speciality> specialities;
 	
