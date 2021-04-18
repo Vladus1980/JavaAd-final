@@ -2,11 +2,35 @@ package ua.lviv.lgs.domain;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name = "faculty")
 public class Faculty {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "faculty_id")
 	private Integer id;
+	@Column
 	private String title;
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "subject_faculty", joinColumns = @JoinColumn(name = "faculty_id"), inverseJoinColumns = @JoinColumn(name = "subject_id"))
 	private Set<Subject> examSubjects;
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "facolty")
+	@Column(nullable = false)
 	private Set<Speciality> specialities;
 	
 	

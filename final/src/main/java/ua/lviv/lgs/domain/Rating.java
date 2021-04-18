@@ -1,7 +1,15 @@
 package ua.lviv.lgs.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "rating")
 public class Rating extends Entration{
+	@Column
 	private Double totalMark;
+	@Column
 	private boolean accepted;
 	
 	public Rating() {

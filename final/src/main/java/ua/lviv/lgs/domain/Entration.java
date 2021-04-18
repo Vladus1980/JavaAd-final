@@ -2,12 +2,38 @@ package ua.lviv.lgs.domain;
 
 import java.util.Map;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapKeyColumn;
+import javax.persistence.Table;
+
+@Entity
+@Table(name ="entration")
 public class Entration {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "entration_id")
 	private Integer id;
+	@ManyToOne
+	@JoinColumn(name = "entrant_id", nullable = false)
 	private Entrant entrant;
+	@ManyToOne
+	@JoinColumn(name = "speciality_id", nullable = false)
 	private Speciality speciality;
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "marks_of_zno")
+	@MapKeyColumn(name = "subject_id")
 	private Map<Subject, Integer> marksOfZNO;
+	@Column
 	private Integer attMark;
 	
 	
