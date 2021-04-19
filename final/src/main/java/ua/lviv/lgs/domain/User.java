@@ -53,6 +53,16 @@ public class User {
 		this.active = active;
 		this.accessLevels = accessLevels;
 	}
+	
+	public User(User user) {
+		this.id = user.id;
+		this.firstName = user.firstName;
+		this.lastName = user.lastName;
+		this.email = user.email;
+		this.password = user.password;
+		this.active = user.active;
+		this.accessLevels = user.accessLevels;
+	}
 
 
 	public User(Integer id, String firstName, String lastName, String email, String password, boolean active,
