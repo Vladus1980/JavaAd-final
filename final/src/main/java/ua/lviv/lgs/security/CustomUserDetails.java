@@ -32,7 +32,7 @@ public CustomUserDetails (User user, List<String> accessLevels) {
 	@Override
 	public String getUsername() {
 		
-		return super.getFirstName();
+		return super.getEmail();
 	}
 
 	@Override
