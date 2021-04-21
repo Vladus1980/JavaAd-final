@@ -1,6 +1,5 @@
 package ua.lviv.lgs.config;
 
-import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -10,11 +9,13 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
+import ua.lviv.lgs.service.UserService;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
-    private DataSource dataSource;
+    private UserService userService;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -35,11 +36,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.jdbcAuthentication()
-				.dataSource(dataSource)
-				.passwordEncoder(NoOpPasswordEncoder.getInstance())
-				.usersByUsernameQuery("select email, password, active from user where email=?")
-				.authoritiesByUsernameQuery("select usr.email, ac_lvl.access_levels from user usr inner join access_level ac_lvl on usr.user_id = ac_lvl.user_id where usr.email=?");
+		auth.userDetailsService(userService)
+		.passwordEncoder(NoOpPasswordEncoder.getInstance());
 	}
 
 }
