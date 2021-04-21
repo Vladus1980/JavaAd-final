@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -26,7 +27,16 @@ public class Entrant extends User{
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name="speciality_entrant", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "speciality_id"))
 	private Set<Speciality> entrantSpeciality;
-	
+	 @MapsId
+	    private User user;
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "entrant")
 	@Column(nullable = false)
 	private Set<Entration> entrations;
