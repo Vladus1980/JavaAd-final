@@ -41,6 +41,18 @@ public class User implements UserDetails{
 	private String password;
 	@Column
 	private boolean active;
+	@Column
+	private String activationCode;
+	public String getActivationCode() {
+		return activationCode;
+	}
+
+
+	public void setActivationCode(String activationCode) {
+		this.activationCode = activationCode;
+	}
+
+
 	@ElementCollection(targetClass = AccessLevel.class, fetch = FetchType.EAGER)
 	@CollectionTable(name = "accsses_level", joinColumns = @JoinColumn(name="user_id"))
 	@Enumerated(EnumType.STRING)
