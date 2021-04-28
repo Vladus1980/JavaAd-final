@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
 	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
-<head>
+<head th:replace="header::commonHeader(_)">
 	<meta charset="utf-8">
     <title>Приймальна комісія</title>
 </head>
@@ -12,7 +12,8 @@
         <form th:action="@{/logout}" method="post">
         	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
             <input type="submit" value="Вийти"/>
-            <div> <a href="/user">Користувачи</a></div>
+            <div> <a href="/user">Користувачі</a></div>
+            <div><a href="/user/profile">Профіль користувача</a></div>
         </form>
     </body>
 </html> 

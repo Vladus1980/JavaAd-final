@@ -2,29 +2,39 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
 	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
-<head>
+<head th:replace="header::commonHeader(_)">
 	<meta charset="utf-8">
     <title>Приймальна комісія</title>
 </head>
 
-<body>
-    <h3>Авторизація</h3>
+<body th:fragment="commonLogin(title, path, isLoginForm)">
+    <h3 th:text="${title}"></h3>
     <div th:if="${message}">
         <p th:text="${message}"/>
     </div>
 
     <div th:if="${param.error}">
-      	Ви ввели невірні данні!
+      	Введені некоректні данні!
     </div>
     <div th:if="${param.logout}">
         Ви вийшли з програми!
     </div>
-    <form th:action="@{/login}" method="post">
+    <form th:action="${path}" method="post">
         <div><input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/></div>
-        <div><label>Email: <input type="text" name="username"/></label></div>
+        <div th:remove="${isLoginForm}?body"><label>Ім'я: <input type="text" name="firstName"/></label></div>
+        <div th:remove="${isLoginForm}?body"><label>Прізвище: <input type="text" name="lastName"/></label></div>
+        <div><label>Email: <input type="text" th:name="${isLoginForm}?username:email"/></label></div>        
         <div><label>Пароль: <input type="password" name="password"/></label></div>
-        <div><input type="submit" value="Увійти"/></div>
-        <a href="/registration">Створити нового користувача</a>
+        <div th:if="${isLoginForm}"><label><input type="checkbox" name="remember-me"/>Запам'ятати мене</label></div>			
+        <div th:if="${!isLoginForm}">
+            <div class="g-recaptcha" data-sitekey="6LdnEL4UAAAAAM6h1YjSYgcOdN6BSAZBhU8pyM-m"></div>
+            <div th:if="${captchaError}">
+				<p th:text="${captchaError}"/>
+			</div>            
+        </div>
+        <div th:if="${isLoginForm}"><input type="submit" value="Увійти"/></div>
+        <div th:if="${!isLoginForm}"><input type="submit" value="Реєстрація"/></div>
+        <a th:if="${isLoginForm}" href="/registration">Створити нового користувача</a>
     </form>
 </body>
 
