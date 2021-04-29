@@ -2,18 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
 	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
-<head>
-	<meta charset="utf-8">
-    <title>Приймальна комісія</title>
-</head>
-
-<body>
-    <h3>У вас недостатньо прав для перегляду даної сторінки!</h3>
-
-	<form th:action="@{/logout}" method="post">
+<th:block th:replace="common::commonPage(_, ~{::main})">
+	<main>
+		<h3>[[${title}]]</h3>
+		<p class="lead">У Вас недостатньо прав для перегляду цієї сторінки</p>
+		
+		<form th:action="@{/logout}" method="post">
         	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-            <input type="submit" value="Увійти під іншим користувачем"/>
-    </form>  
-</body>
+            <button class="btn btn-primary mt-3" type="submit">Увійти під іншим користувачем</button>            
+    	</form>  
+	</main>
+</th:block>
 
 </html> 
