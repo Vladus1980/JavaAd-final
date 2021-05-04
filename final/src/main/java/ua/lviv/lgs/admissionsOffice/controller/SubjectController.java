@@ -50,7 +50,7 @@ public class SubjectController {
 		boolean subjectExists = !subjectService.createSubject(subject);
 		
 		if (subjectExists) {
-			model.addAttribute("message", "Цей предмет вже є!");
+			model.addAttribute("subjectExistsMessage", "Цей предмет вже є!");
 			return "subjectCreator";
 		}
 		

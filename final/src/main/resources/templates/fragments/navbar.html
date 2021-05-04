@@ -24,7 +24,7 @@
 					[[#{navbar.university}]]
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" th:href="@{/faculty}">[[#{navbar.Faculties}]]</a>
+					<a class="dropdown-item" th:href="@{/faculty}">[[#{navbar.faculties}]]</a>
 					<a class="dropdown-item" th:href="@{/speciality}">[[#{navbar.specialities}]]</a>
 					<a class="dropdown-item" th:href="@{/subject}">[[#{navbar.subjects}]]</a>
 				</div>
@@ -46,7 +46,7 @@
 			</li>
 		</ul>
 		
-		<div sec:authorize="!isAuthenticated()">
+		<div id="i18n">
 			<span th:text="#{navbar.lang.change}"></span>:
 			<select id="locales">    			
     			<option value="en" th:text="#{navbar.lang.en}"></option>
@@ -100,6 +100,15 @@
 	            localStorage.setItem('locales', selectedOption);
 	        }
 	    });
+	});
+	document.addEventListener('DOMContentLoaded', function() {
+		var currentPath = window.location.pathname;
+
+		if (currentPath == '/') {
+			$('#i18n')[0].style.display = 'block';
+		} else {
+			$('#i18n')[0].style.display = 'none';
+		} 
 	});
 	</script>
 </nav>

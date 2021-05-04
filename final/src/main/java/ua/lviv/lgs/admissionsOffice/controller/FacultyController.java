@@ -56,7 +56,7 @@ public class FacultyController {
 		boolean facultyExists = !facultyService.createFaculty(faculty, form);
 		
 		if (facultyExists) {
-			model.addAttribute("message", "Такий факультет вже є!");
+			model.addAttribute("facultyExistsMessage", "Такий факультет вже є!");
 			model.addAttribute("subjects", subjectService.findAll());
 			
 			return "facultyCreator";
